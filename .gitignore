@@ -1,0 +1,14 @@
+.idea/
+.vscode/
+node_modules/
+mongodata/
+build/
+tmp/
+temp/
+yarn.lock
+package-lock.json
+**/.env.docker
+**/.env
+dist/
+default.ts
+mongodata/

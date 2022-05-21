@@ -1,0 +1,27 @@
+version: "3.4"
+
+services:
+  app:
+    build: .
+    depends_on:
+      - mongo
+    volumes:
+      - ~/Desktop/projects/Hybr1d/backend/:/app
+      - /app/node_modules
+    ports:
+      - "5001:5001"
+    restart: unless-stopped
+    env_file: ./.env
+    stdin_open: true
+    tty: true
+  mongo:
+    image: mongo
+    restart: always
+    env_file: ./.env
+    ports:
+      - "27107:27017"
+    volumes:
+      - "./mongodata:/data/db"
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=example
