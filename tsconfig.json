@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@middlewares": ["./src/middlewares/index.ts"],
+      "@utils": ["./src/utils/index.ts"],
       "@utils/*": ["./src/utils/*"],
       "@user/*": ["./src/modules/user/*"],
       "@catalog/*": ["./src/modules/catalog/*"],

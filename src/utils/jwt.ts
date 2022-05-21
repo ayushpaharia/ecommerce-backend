@@ -6,13 +6,13 @@ const privateKey = Buffer.from(PRIVATE_KEY, "base64").toString("ascii")
 const PUBLIC_KEY = process.env.PUBLIC_KEY as string
 const publicKey = Buffer.from(PUBLIC_KEY, "base64").toString("ascii")
 
-export function signJWT(payload: any, options?: JWT.SignOptions) {
+export function sign(payload: any, options?: JWT.SignOptions) {
   return JWT.sign(payload, privateKey, {
     ...(options && options),
     algorithm: "RS256",
   })
 }
-export function verifyJWT(token: string) {
+export function verify(token: string) {
   try {
     const decoded = JWT.verify(token, publicKey)
 
@@ -24,4 +24,9 @@ export function verifyJWT(token: string) {
       decoded: null,
     }
   }
+}
+
+export default {
+  sign,
+  verify,
 }

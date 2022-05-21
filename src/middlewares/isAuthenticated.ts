@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express"
 
-import { verifyJWT } from "@utils/jwt"
+import { jwt } from "@utils"
 import User from "@user/models/User.model"
 
 const isAuthenticated = async (
@@ -13,7 +13,7 @@ const isAuthenticated = async (
 
     if (!token) throw new Error("Unauthenticated")
 
-    const { valid, expired, decoded } = verifyJWT(token)
+    const { valid, expired, decoded } = jwt.verify(token)
 
     const doesUserExist = await User.findById(decoded.id)
     if (!doesUserExist) throw new Error("Unauthenticated")

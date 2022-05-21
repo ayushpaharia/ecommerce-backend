@@ -8,8 +8,12 @@ import morgan from "morgan"
 import express from "express"
 
 import { trim } from "@middlewares"
+import { swaggerSpecs } from "@utils"
+
+import swaggerUI from "swagger-ui-express"
 
 const registerMiddlewares = (app: express.Application) => {
+  app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecs))
   app.use(express.json())
   app.use(express.urlencoded({ extended: true }))
   app.use(cookieParser())

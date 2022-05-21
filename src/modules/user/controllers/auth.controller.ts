@@ -1,11 +1,10 @@
 import { Request, Response } from "express"
 import Argon from "argon2"
-import config from "config"
 import cookie from "cookie"
 
 import User, { UserDocument } from "@user/models/User.model"
 import { findUser } from "@user/helper/findUser"
-import { signJWT } from "@utils/jwt"
+import { jwt } from "@utils"
 
 import _ from "lodash"
 
@@ -49,7 +48,7 @@ export const loginUserHandler = async (req: Request, res: Response) => {
     if (!passwordMatch)
       return res.status(401).json({ data: "", error: "Unauthorized" })
 
-    const token = signJWT(
+    const token = jwt.sign(
       { id: doesUserExist["_id"] },
       {
         expiresIn: process.env.ACCESS_TOKEN_TTL as string,
